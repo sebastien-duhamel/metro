@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main{
+public class Metro{
 
     // les temps de voyage entre chaque station sont de 2 minutes
     private static final int TEMPS_TRAJET = 2;
