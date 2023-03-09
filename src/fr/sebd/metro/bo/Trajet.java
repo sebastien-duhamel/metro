@@ -92,8 +92,8 @@ public class Trajet {
 
     @Override
     public String toString() {
-        return "Trajet [ligneDepart=" + ligneDepart + ", stationDepart=" + stationDepart + ", ligneArrivee="
-                + ligneArrivee + ", stationArrivee=" + stationArrivee + ", nombreStationParcours="
+        return "Trajet [ligneDepart=" +  ligneDepart  + ", stationDepart=" + stationDepart + ", ligneArrivee="
+                +  ligneArrivee  + ", stationArrivee=" + stationArrivee + ", nombreStationParcours="
                 + nombreStationParcours + ", nombreChangementLignes=" + nombreChangementLignes + ", tempsParcours="
                 + tempsParcours + ", prix=" + prix + "]";
     }
