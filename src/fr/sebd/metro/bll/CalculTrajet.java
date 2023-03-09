@@ -141,7 +141,7 @@ public class CalculTrajet implements VariablesGlobale {
                 System.out.println("intersection ligne d'arrivée : " + intersectionLigneArrivee + "\n");
 
 
-                multipleChemin("JAVA", "PYTHON");
+                multipleChemin(trajet);
 
 
             }
