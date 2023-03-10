@@ -16,9 +16,9 @@ public class Metro implements VariablesGlobale{
 
         trajet.setTempsParcours(trajet.getNombreStationParcours()*TEMPS_TRAJET + trajet.getNombreChangementLignes() * TEMPS_ATTENTE);
 
-        System.out.println();
+
         if ( trajet.getTempsParcours() > 0){
-            System.out.println("votre temps de parcours pour votre déplacements sera de " + trajet.getTempsParcours() + " min,");
+            System.out.println("votre temps de parcours pour votre déplacements sera de " + trajet.getTempsParcours() + " minutes,");
             System.out.println("vous parcourerez " + trajet.getNombreStationParcours() + " station(s) avec " + trajet.getNombreChangementLignes() + " changement de ligne(s)");
         }
 

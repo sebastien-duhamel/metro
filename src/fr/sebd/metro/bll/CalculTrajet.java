@@ -32,11 +32,11 @@ public class CalculTrajet implements VariablesGlobale {
         while (lignesDepart.isEmpty() || lignesArrivee.isEmpty()) {
 
             // on demande la ligne et la station de départ
-            System.out.print("Veuillez entrer la station de départ : ");
+            System.out.print("Saisir la station de départ : ");
             trajet.setStationDepart(scanner.nextLine().toUpperCase());
 
             // on demande la ligne et la station d'arrivée
-            System.out.print("Veuillez entrer la station d'arrivée : ");
+            System.out.print("Saisir la station d'arrivée : ");
             trajet.setStationArrivee(scanner.nextLine().toUpperCase());
 
             System.out.println();
@@ -45,12 +45,26 @@ public class CalculTrajet implements VariablesGlobale {
 
             lignesArrivee = findLinesStartOrStop(trajet.getStationArrivee());
 
+            if( lignesDepart.size()>1 || lignesArrivee.size()>1){
+                for ( String ligneDepart : lignesDepart){
+                    for ( String ligneArrivee : lignesArrivee){
+                        if ( ligneDepart.equals(ligneArrivee)) {
+                            lignesDepart.clear();
+                            lignesArrivee.clear();
+                            lignesDepart.add(ligneDepart);
+                            lignesArrivee.add(ligneArrivee);
+                            break;
+                        }
+                    }
+                }
+            }
+
             System.out.println("La station " + trajet.getStationDepart() + " correspond à la (aux) ligne(s) : " + lignesDepart);
             System.out.println("La station " + trajet.getStationArrivee() + " correspond à la (aux) ligne(s) : " + lignesArrivee);
             System.out.println();
 
             if (lignesDepart.isEmpty() || lignesArrivee.isEmpty()) {
-                System.out.println("Veuillez entrez stations qui existent");
+                System.out.println("Veuillez entrer des stations qui existent");
             }
 
         }
@@ -62,7 +76,7 @@ public class CalculTrajet implements VariablesGlobale {
      * méthode permettant de definir la/les ligne de départ/arrivée possible(s)
      *
      * @param station
-     * @return String[] de lignes possible
+     * @return Liste de lignes possible
      */
     private List<String> findLinesStartOrStop(String station) {
 
@@ -70,8 +84,9 @@ public class CalculTrajet implements VariablesGlobale {
 
         for (Entry<String, String[]> entry : LIGNES_METRO.entrySet()) {
             String ligne = entry.getKey();
+//           System.out.println("entry.getKey()" + entry.getKey() );
             String[] stations = entry.getValue();
-
+//            System.out.println("entry.getValue()" + entry.getValue().length );
             for (String s : stations) {
                 if (s.equals(station)) {
                     lignes.add(ligne);
@@ -93,6 +108,8 @@ public class CalculTrajet implements VariablesGlobale {
         if (lignesArrivee.size() == 1) {
             trajet.setLigneArrivee(lignesArrivee.get(0));
         }
+
+
 
         //verification si le trajet est sur la même ligne
         if (trajet.getLigneDepart() != null && trajet.getLigneArrivee() != null && trajet.getLigneDepart().equals(trajet.getLigneArrivee())) {
@@ -148,14 +165,14 @@ public class CalculTrajet implements VariablesGlobale {
 
         }
 
-        System.out.println(trajet);
+ //       System.out.println(trajet);
         return trajet;
     }
 
     ;
 
     /**
-     * Methode permettant de calculer le nombre de station parcourue quand
+     * Methode permettant de calculer le nombre de stations parcourues lorsque
      * la station de départ et d'arrivée se trouvent sur la meme ligne
      *
      * @param ligne
@@ -164,7 +181,7 @@ public class CalculTrajet implements VariablesGlobale {
      * @return int nombreStationParcourue
      */
     private int parcoursMemeLigne(String ligne, String stationDepart, String stationArrivee) {
-        int nombreStationParcourue = 0;
+        int nombreStationParcourue ;
         int positionPointDepart = 0;
         int positionPointArrivee = 0;
 
@@ -194,8 +211,8 @@ public class CalculTrajet implements VariablesGlobale {
 
     private void multipleChemin(Trajet trajet) {
         int[] chemins;
-        List<String> lignesEmprunte = new ArrayList<String>();
-        List<String> lignesPossiblesParNoeud = new ArrayList<String>();
+        List<String> lignesEmprunte = new ArrayList<>();
+        List<String> lignesPossiblesParNoeud = new ArrayList<>();
         String noeudDepart = "JAVA";
         String noeudArrivee = "PYTHON";
         String curseur = "";
@@ -220,25 +237,22 @@ public class CalculTrajet implements VariablesGlobale {
 
         for (String noeud : noeuds) {
             System.out.println("*****************pour le noeud**************** : " + noeud);
-            //je dois trouver la ligne qui contient le noeudDepart java et le premier noeudPHP je connais la ligne de depart
-            int vroomm = 0;
+            // exemple je dois trouver la ligne qui contient le noeudDepart java et le premier noeud PHP je connais la ligne de depart
+            int nombresStations = 0;
 
             for (String ligne : lignesDepart) {
                 System.out.println("sur la ligne " + ligne);
 
                 if (STATION_LIGNES_COMMUNES.get(ligne).contains(noeudDepart) && STATION_LIGNES_COMMUNES.get(ligne).contains(noeud)) {
-                    vroomm = parcoursMemeLigne(ligne, depart, noeud);
-                    System.out.println(vroomm);
+                    nombresStations= parcoursMemeLigne(ligne, depart, noeud);
+                    System.out.println(nombresStations);
                     ancienNoeud = depart;
                     //depart = noeud;
-
                 }
             }
-
 
         }
 
     }
-
 
 }
