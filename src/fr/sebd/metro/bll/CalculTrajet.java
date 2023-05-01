@@ -59,8 +59,8 @@ public class CalculTrajet implements VariablesGlobale {
                 }
             }
 
-            System.out.println("La station " + trajet.getStationDepart() + " correspond à la (aux) ligne(s) : " + lignesDepart);
-            System.out.println("La station " + trajet.getStationArrivee() + " correspond à la (aux) ligne(s) : " + lignesArrivee);
+            System.out.println("La station " + trajet.getStationDepart() + " correspond " + (lignesDepart.size() > 1? "aux lignes : " : " à la ligne : ") + lignesDepart);
+            System.out.println("La station " + trajet.getStationArrivee() + " correspond " + (lignesDepart.size() > 1? "aux lignes : " : " à la ligne : ") + lignesArrivee);
             System.out.println();
 
             if (lignesDepart.isEmpty() || lignesArrivee.isEmpty()) {
@@ -230,7 +230,7 @@ public class CalculTrajet implements VariablesGlobale {
         System.out.println("noeud de départ : " + noeudDepart);
         System.out.println("noeud d'arrivee : " + noeudArrivee);
         List<String> noeuds = NOEUDS.get(depart);
-        List<String> noeudsSuivant = NOEUDS.get(depart);
+        List<String> noeudsSuivant ;
         System.out.println("noeuds commun au depart, je peux aller du noeud de départ : " + noeudDepart + " vers les noeuds :" + noeuds +
                 " par les lignes " + lignesDepart);
 
@@ -239,6 +239,7 @@ public class CalculTrajet implements VariablesGlobale {
             System.out.println("*****************pour le noeud**************** : " + noeud);
             // exemple je dois trouver la ligne qui contient le noeudDepart java et le premier noeud PHP je connais la ligne de depart
             int nombresStations = 0;
+            String noeudAdjacent;
 
             for (String ligne : lignesDepart) {
                 System.out.println("sur la ligne " + ligne);
@@ -246,6 +247,8 @@ public class CalculTrajet implements VariablesGlobale {
                 if (STATION_LIGNES_COMMUNES.get(ligne).contains(noeudDepart) && STATION_LIGNES_COMMUNES.get(ligne).contains(noeud)) {
                     nombresStations= parcoursMemeLigne(ligne, depart, noeud);
                     System.out.println(nombresStations);
+                    noeudAdjacent = noeud;
+                    System.out.println("voici le noeud adjacent "+ noeudAdjacent);
                     ancienNoeud = depart;
                     //depart = noeud;
                 }

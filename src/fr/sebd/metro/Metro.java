@@ -6,6 +6,7 @@ import fr.sebd.metro.bo.Trajet;
 public class Metro implements VariablesGlobale{
 
     public static void main(String[] args)  {
+        //test
 
         Trajet trajet ;
         CalculTrajet calculTrajet = new CalculTrajet();
@@ -14,11 +15,11 @@ public class Metro implements VariablesGlobale{
 
         trajet = calculTrajet.trouverParcours(trajet);
 
-        trajet.setTempsParcours(trajet.getNombreStationParcours()*TEMPS_TRAJET + trajet.getNombreChangementLignes() * TEMPS_ATTENTE);
+        trajet.setTempsParcours( trajet.getNombreStationParcours()*TEMPS_TRAJET + trajet.getNombreChangementLignes() * TEMPS_ATTENTE );
 
 
         if ( trajet.getTempsParcours() > 0){
-            System.out.println("votre temps de parcours pour votre déplacements sera de " + trajet.getTempsParcours() + " minutes,");
+            System.out.println("votre temps de parcours pour votre déplacement sera de " + trajet.getTempsParcours() + " minutes,");
             System.out.println("vous parcourerez " + trajet.getNombreStationParcours() + " station(s) avec " + trajet.getNombreChangementLignes() + " changement de ligne(s)");
         }
 
